@@ -13,6 +13,10 @@ RUN npm install
 # Copy other file to my current directory
 COPY . .
 
+# environment variable
+ARG REACT_APP_SERVER_URL
+ENV REACT_APP_SERVER_URL=${REACT_APP_SERVER_URL}
+
 # Build optimise static file
 RUN npm run build
 
@@ -22,6 +26,8 @@ FROM nginx:1.25.2-alpine-slim
 # Copy static file to my nignx folder for serve static contain
 COPY --from=builder /app/build /usr/share/nginx/html
 
+# Copy nginx configuration file to nginx folder
+COPY nginx.conf /etc/nginx/nginx.conf
 # Open the port for react
 EXPOSE 80
 

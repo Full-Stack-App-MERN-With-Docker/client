@@ -1,0 +1,11 @@
+services:
+  client:
+    image: adeem07/client:latest
+    restart: always
+    build :
+      context: .
+      dockerfile: Dockerfile
+    container_name: client-app-container
+    ports:
+      - 3005:80        # Map port 3005 on the host to port 80 in the container
+      
